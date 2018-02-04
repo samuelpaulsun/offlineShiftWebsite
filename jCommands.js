@@ -323,16 +323,30 @@ function getRandomPassphrase(){
 	var lPassphrase132 = '';
 	var checksum;
 	var randomWords = [];		// digital words as in 2 bytes (16 bits) not real words!
+	var randomArray = new Uint16Array(8);		// digital words as in 2 bytes (16 bits) not real words!
 	var start=0;
 	var end=11;
-	randomWords[4]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[7]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[6]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[1]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[8]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[3]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[2]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
-	randomWords[5]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	
+	window.crypto.getRandomValues(randomArray);
+	
+	randomWords[1]=addZerosToHex(randomArray[0].toString(16));
+	randomWords[2]=addZerosToHex(randomArray[1].toString(16));
+	randomWords[3]=addZerosToHex(randomArray[2].toString(16));
+	randomWords[4]=addZerosToHex(randomArray[3].toString(16));
+	randomWords[5]=addZerosToHex(randomArray[4].toString(16));
+	randomWords[6]=addZerosToHex(randomArray[5].toString(16));
+	randomWords[7]=addZerosToHex(randomArray[6].toString(16));
+	randomWords[8]=addZerosToHex(randomArray[7].toString(16));
+	
+	//randomWords[4]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[7]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[6]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[1]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[8]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[3]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[2]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	//randomWords[5]=addZerosToHex(Math.floor(Math.random()*65535).toString(16));
+	
 	lPassphrase128=randomWords[1]+randomWords[2]+randomWords[3]+randomWords[4]+randomWords[5]+randomWords[6]+randomWords[7]+randomWords[8];
 	var sha256Hash = lisk.crypto.getSha256Hash(lPassphrase128,"hex");
 	lPassphrase128=hexToBin(lPassphrase128);
@@ -418,5 +432,9 @@ function getRandomPassphrase(){
 			}
 		}
 		return strBinNumber;
+	}
+	
+	function getCryptoRandom(){
+	
 	}
 }		
