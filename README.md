@@ -1,4 +1,4 @@
-# offlineLiskWebsite
+# offline Shift Website
 Website that combines all tools needed to perform offline transactions for the SHIFT network.
 This includes, wallet gerneation, voting, sending, and delegrate registration.
 
